@@ -1,6 +1,7 @@
 package com.movie.booking.api.controller;
 
 import com.movie.booking.api.entity.Role;
+import com.movie.booking.api.entity.RoleEnum;
 import com.movie.booking.api.entity.User;
 import com.movie.booking.api.model.auth.JwtUserModel;
 import com.movie.booking.api.model.auth.UserLoginModel;
@@ -47,11 +48,7 @@ public class AuthController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        Set<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toSet());
 
         return ResponseEntity.ok(
                 new JwtUserModel(
@@ -60,7 +57,9 @@ public class AuthController {
                             userDetails.getId(),
                             userDetails.getUsername(),
                             userDetails.getEmail(),
-                            roles
+                            userDetails.getAuthorities().stream()
+                                    .map(item -> item.getAuthority())
+                                    .collect(Collectors.toSet())
                         )
                 )
         );
@@ -83,14 +82,34 @@ public class AuthController {
         // Create new user's account
         User user = modelMapper.map(userRegisterModel, User.class);
         user.setPassword(passwordEncoder.encode(userRegisterModel.getPassword()));
-        Set<Role> roles = userRegisterModel.getRoles().stream()
-                .map(item -> roleRepository.findByName(item.toUpperCase()).orElse(null))
-                .collect(Collectors.toSet());
+        user.setRoles(roleMapper(userRegisterModel.getRoles()));
+        user = userRepository.save(user);
+        return ResponseEntity.ok(new UserModel(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRoles().stream()
+                        .map(item -> item.getName().toString())
+                        .collect(Collectors.toSet())
+        ));
+    }
 
-        user.setRoles(roles);
-        userRepository.save(user);
-
-        return ResponseEntity.ok("User registered successfully!");
+    private Set<Role> roleMapper(Set<String> roles){
+        Set<Role> userRoles = new HashSet<>();
+        for(String role : roles){
+            switch (role){
+                case "ROLE_ADMIN":
+                    userRoles.add(roleRepository.findRoleByName(RoleEnum.ROLE_ADMIN).orElse(null));
+                    break;
+                case "ROLE_MODERATOR":
+                    userRoles.add(roleRepository.findRoleByName(RoleEnum.ROLE_MODERATOR).orElse(null));
+                    break;
+                default:
+                    userRoles.add(roleRepository.findRoleByName(RoleEnum.ROLE_USER).orElse(null));
+                    break;
+            }
+        }
+        return userRoles;
     }
 
 }
