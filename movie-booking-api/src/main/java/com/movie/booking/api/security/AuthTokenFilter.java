@@ -1,5 +1,6 @@
 package com.movie.booking.api.security;
 
+import com.movie.booking.api.service.UserService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ import java.io.IOException;
 public class AuthTokenFilter extends OncePerRequestFilter {
 
     private JwtUtils jwtUtils;
-    private UserDetailsServiceImpl userDetailsService;
+    private UserService userService;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthTokenFilter.class);
 
@@ -33,8 +34,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userService.loadUserByUsername(username);
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

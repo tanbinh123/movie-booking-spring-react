@@ -1,25 +1,13 @@
 package com.movie.booking.api.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
 
-import javax.persistence.*;
+public enum Role implements GrantedAuthority {
+    ROLE_USER,
+    ROLE_ADMIN;
 
-@Entity(name="roles")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class Role {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
-    private RoleEnum name;
-
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }

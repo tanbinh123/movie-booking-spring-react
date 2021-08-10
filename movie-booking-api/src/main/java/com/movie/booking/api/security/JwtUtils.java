@@ -1,5 +1,7 @@
 package com.movie.booking.api.security;
 
+import com.movie.booking.api.entity.User;
+import com.movie.booking.api.service.UserService;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        User userPrincipal = (User) authentication.getPrincipal();
 
         return "Bearer " + Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
