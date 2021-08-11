@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -29,6 +30,6 @@ public class Screening {
 
     @Column(name="screening_date")
     @JsonProperty("screening_date")
-    private Date screeningDate;
+    private LocalDateTime screeningDate;
 
 }

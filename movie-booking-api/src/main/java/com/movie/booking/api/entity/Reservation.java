@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -26,8 +26,7 @@ public class Reservation {
 
     @JsonProperty("reservation_date")
     @Column(name="reservation_date")
-    @Temporal(TemporalType.DATE)
-    private Date reservationDate;
+    private LocalDateTime reservationDate;
 
     @ManyToOne
     private User user;

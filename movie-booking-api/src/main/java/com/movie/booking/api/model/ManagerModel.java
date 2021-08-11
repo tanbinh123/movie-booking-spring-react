@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,18 +17,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserModel {
+public class ManagerModel {
     private Long id;
     @JsonProperty("first_name")
     private String firstName;
     @JsonProperty("last_name")
     private String lastName;
-    private String username;
     private String email;
     private String phone;
     private String address;
-    @JsonIgnore
-    private String password;
-    private List<ReservationModel> reservations;
-    private Collection<Role> roles;
 }
