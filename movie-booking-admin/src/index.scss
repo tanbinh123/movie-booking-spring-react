@@ -1,0 +1,27 @@
+//setting custom bootstrap colors
+$primary:#bb9649;
+$secondary:#726C5E;
+$success:#6da84e;
+$info:#2a2d2e;
+$warning:#eb9716;
+$danger:#f44336;
+$light:#E5E2D8;
+$dark:#1c1e1f;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark,
+) !default;
+
+@import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+body {
+  font: normal 1em 'Quicksand', sans-serif;
+}
