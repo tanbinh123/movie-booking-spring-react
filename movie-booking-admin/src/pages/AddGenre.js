@@ -30,7 +30,7 @@ function AddGenre() {
             <form className="mt-3" onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label className="form-label">Nom</label>
-                    <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} />
+                    <input type="text" className="form-control" value={name} onChange={e => setName(e.target.value)} required />
                 </div>
                 <div className="mt-3">
                     <button type="submit" className="btn btn-primary me-2">ajouter</button>

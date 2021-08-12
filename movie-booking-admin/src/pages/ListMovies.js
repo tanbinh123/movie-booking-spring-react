@@ -31,6 +31,7 @@ function ListMovies() {
                     <tr>
                         <th scope="col">Poster</th>
                         <th scope="col">Titre</th>
+                        <th scope="col">Durée</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -41,6 +42,7 @@ function ListMovies() {
                                 <tr id={"movie-"+movie.id}>
                                     <td><img src={movie.poster} height="120" width="90"/></td>
                                     <td>{movie.title}</td>
+                                    <td>{movie.runtime}</td>
                                     <td><button type="button" onClick={()=>handleDelete(movie.id)} className="btn btn-danger text-white">supprimer</button></td>
                                 </tr>
                             )

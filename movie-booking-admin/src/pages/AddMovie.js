@@ -45,27 +45,27 @@ function AddMovie() {
             <form className="mt-3" onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label className="form-label">Titre</label>
-                    <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} />
+                    <input type="text" className="form-control" value={title} onChange={e => setTitle(e.target.value)} required />
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Poster URL</label>
-                    <input type="text" className="form-control" value={poster} onChange={e => setPoster(e.target.value)} />
+                    <input type="text" className="form-control" value={poster} onChange={e => setPoster(e.target.value)} required/>
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Score IMDB</label>
-                    <input type="text" className="form-control" value={imdbRating} onChange={e => setImdbRating(e.target.value)} />
+                    <input type="text" className="form-control" value={imdbRating} onChange={e => setImdbRating(e.target.value)} required />
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Date de sortie</label>
-                    <input type="date" className="form-control" value={releaseDate} onChange={e => setReleaseDate(e.target.value)} />
+                    <input type="date" className="form-control" value={releaseDate} onChange={e => setReleaseDate(e.target.value)} required/>
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Synopsis</label>
-                    <textarea rows="10" style={{resize:"none"}} className="form-control" value={description} onChange={e => setDescription(e.target.value)} ></textarea>
+                    <textarea rows="10" style={{resize:"none"}} className="form-control" value={description} onChange={e => setDescription(e.target.value)} required></textarea>
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Durée</label>
-                    <input type="text" className="form-control" value={runtime} onChange={e => setRuntime(e.target.value)} />
+                    <input type="text" className="form-control" value={runtime} onChange={e => setRuntime(e.target.value)} required/>
                 </div>
                 <div className="mt-3">
                     <button type="submit" className="btn btn-primary me-2">ajouter</button>

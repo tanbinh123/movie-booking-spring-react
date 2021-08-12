@@ -23,16 +23,25 @@ public class Screening {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "movie_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "auditorium_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
 
     @Column(name="screening_date")
     @JsonProperty("screening_date")
     private LocalDateTime screeningDate;
 
+    @JsonBackReference
+    public Auditorium getAuditorium() {
+        return auditorium;
+    }
+
+    @JsonBackReference
+    public Movie getMovie() {
+        return movie;
+    }
 }

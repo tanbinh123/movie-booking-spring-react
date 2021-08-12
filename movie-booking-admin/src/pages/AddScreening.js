@@ -19,6 +19,7 @@ function AddScreening() {
     useEffect(() => {
         API.get("movies").then(res => {
             setMovies(res.data);
+            setMovie(res.data[0]);
         }).catch(err => {
             console.log("Impossible to fetch /api/movies");
         });
@@ -27,10 +28,15 @@ function AddScreening() {
     useEffect(() => {
         API.get("auditoriums").then(res => {
             setAuditoriums(res.data);
+            setAuditorium(res.data[0]);
         }).catch(err => {
             console.log("Impossible to fetch /api/auditoriums");
         });
     },[movies]);
+
+    useEffect(() => {
+        console.log(movie, auditorium);
+    },[movie, auditorium]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

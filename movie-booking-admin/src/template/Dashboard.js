@@ -17,6 +17,7 @@ import ListGenres from '../pages/ListGenres'
 import ListMovies from '../pages/ListMovies'
 import ListUsers from '../pages/ListUsers'
 import AddScreening from '../pages/AddScreening'
+import ListScreenings from '../pages/ListScreenings'
 
 function Dashboard() {
 
@@ -41,10 +42,11 @@ function Dashboard() {
                     <li><h3 className="m-0 mt-2">Movies</h3></li>
                     <li><Link to="/add-genre">Ajouter un genre</Link></li>
                     <li><Link to="/add-movie">Ajouter un film</Link></li>
-                    <li><Link to="/list-genres">List des genres</Link></li>
-                    <li><Link to="/list-movies">List des films</Link></li>
+                    <li><Link to="/list-genres">Liste des genres</Link></li>
+                    <li><Link to="/list-movies">Liste des films</Link></li>
                     <li><h3 className="m-0 mt-2">Screenings</h3></li>
-                    <li><Link to="/add-screening">Add screening</Link></li>
+                    <li><Link to="/add-screening">Ajouter une séance</Link></li>
+                    <li><Link to="/list-screenings">Liste des séances</Link></li>
                 </ul>
                 <div id="content-wrapper" className="d-flex flex-column">
                     <Switch>
@@ -77,6 +79,9 @@ function Dashboard() {
                         </Route>
                         <Route path="/list-users">
                             <ListUsers></ListUsers>
+                        </Route>
+                        <Route path="/list-screenings">
+                            <ListScreenings></ListScreenings>
                         </Route>
                         <Route>
                             <PageNotFound></PageNotFound>

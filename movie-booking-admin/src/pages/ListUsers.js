@@ -43,7 +43,7 @@ function ListUsers() {
                     {
                         users.map((user,i)=>{
                             return (
-                                <tr id={"user-"+user.id} className={user.enabled?"enabled":"disabled"}>
+                                <tr id={"user-"+user.id}>
                                     <td>{user.first_name}</td>
                                     <td>{user.last_name}</td>
                                     <td>{user.phone}</td>
@@ -52,13 +52,6 @@ function ListUsers() {
                                     <td>{user.username}</td>
                                     <td>{user.reservations.length}</td>
                                     <td>
-                                        {/* {
-                                            !user.enabled
-                                            ?
-                                            <button type="button" onClick={()=>handleDelete(user.id)} className="btn btn-info text-white me-1">activer</button>
-                                            :
-                                            <button type="button" onClick={()=>handleDelete(user.id)} className="btn btn-warning text-white me-1">desactiver</button>
-                                        } */}
                                         <button type="button" onClick={()=>handleDelete(user.id)} className="btn btn-danger text-white">supprimer</button>
                                     </td>
                                 </tr>
