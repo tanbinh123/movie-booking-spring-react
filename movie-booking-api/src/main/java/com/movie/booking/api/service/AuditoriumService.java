@@ -1,8 +1,11 @@
 package com.movie.booking.api.service;
 
 import com.movie.booking.api.entity.Auditorium;
+import com.movie.booking.api.entity.Seat;
 import com.movie.booking.api.model.AuditoriumModel;
+import com.movie.booking.api.model.CinemaModel;
 import com.movie.booking.api.repository.AuditoriumRepository;
+import com.movie.booking.api.repository.SeatRepository;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,6 +22,10 @@ public class AuditoriumService {
 
     public Collection<AuditoriumModel> getAuditoriums(){
         return Arrays.asList(modelMapper.map(auditoriumRepository.findAll(), AuditoriumModel[].class));
+    }
+
+    public AuditoriumModel getAuditorium(Long id){
+        return modelMapper.map(auditoriumRepository.findById(id).get(), AuditoriumModel.class);
     }
 
     public AuditoriumModel addAuditorium(AuditoriumModel auditoriumModel){

@@ -24,6 +24,10 @@ public class CinemaService {
         return Arrays.asList(modelMapper.map(cinemaRepository.findAll(), CinemaModel[].class));
     }
 
+    public CinemaModel getCinema(Long id){
+        return modelMapper.map(cinemaRepository.findById(id).get(), CinemaModel.class);
+    }
+
     public CinemaModel addCinema(CinemaModel cinemaModel){
         Cinema cinema = cinemaRepository.save(modelMapper.map(cinemaModel, Cinema.class));
         return modelMapper.map(cinema, CinemaModel.class);

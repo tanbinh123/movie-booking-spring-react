@@ -1,5 +1,6 @@
 package com.movie.booking.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,11 @@ public class Seat {
     private Integer rowNumber;
 
     @ManyToOne
-    @JoinColumn(name="auditorium_id", nullable=false)
+    @JoinColumn(name = "auditorium_id")
     private Auditorium auditorium;
+
+    @JsonBackReference
+    public Auditorium getAuditorium() {
+        return auditorium;
+    }
 }

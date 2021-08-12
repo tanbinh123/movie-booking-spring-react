@@ -32,4 +32,5 @@ public class UserModel {
     private String password;
     private List<ReservationModel> reservations;
     private Collection<Role> roles;
+    private Boolean enabled = true;
 }

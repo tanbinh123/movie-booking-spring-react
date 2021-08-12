@@ -21,6 +21,10 @@ public class MovieService {
         return Arrays.asList(modelMapper.map(movieRepository.findAll(), MovieModel[].class));
     }
 
+    public MovieModel getMovie(Long id){
+        return modelMapper.map(movieRepository.findById(id).get(), MovieModel.class);
+    }
+
     public MovieModel addMovie(MovieModel movieModel){
         Movie movie = movieRepository.save(modelMapper.map(movieModel, Movie.class));
         return modelMapper.map(movie, MovieModel.class);

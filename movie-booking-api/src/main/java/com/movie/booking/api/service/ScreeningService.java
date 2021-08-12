@@ -21,6 +21,10 @@ public class ScreeningService {
         return Arrays.asList(modelMapper.map(screeningRepository.findAll(), ScreeningModel[].class));
     }
 
+    public ScreeningModel getScreening(Long id){
+        return modelMapper.map(screeningRepository.findById(id), ScreeningModel.class);
+    }
+
     public ScreeningModel addScreening(ScreeningModel screeningModel){
         Screening screening = screeningRepository.save(modelMapper.map(screeningModel, Screening.class));
         return modelMapper.map(screening, ScreeningModel.class);

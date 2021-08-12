@@ -1,6 +1,7 @@
 package com.movie.booking.api.service;
 
 import com.movie.booking.api.entity.Genre;
+import com.movie.booking.api.model.AuditoriumModel;
 import com.movie.booking.api.model.GenreModel;
 import com.movie.booking.api.repository.GenreRepository;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,10 @@ public class GenreService {
 
     public Collection<GenreModel> getGenres(){
         return Arrays.asList(modelMapper.map(genreRepository.findAll(), GenreModel[].class));
+    }
+
+    public GenreModel getGenre(Long id){
+        return modelMapper.map(genreRepository.findById(id).get(), GenreModel.class);
     }
 
     public GenreModel addGenre(GenreModel genreModel){

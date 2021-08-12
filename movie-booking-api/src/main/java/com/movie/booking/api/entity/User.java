@@ -40,6 +40,8 @@ public class User extends Person implements UserDetails{
     @Enumerated(EnumType.STRING)
     private Collection<Role> roles;
 
+    private Boolean enabled = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
@@ -71,7 +73,7 @@ public class User extends Person implements UserDetails{
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
 
