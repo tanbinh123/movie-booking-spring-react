@@ -19,8 +19,8 @@ import java.util.Collection;
 @Setter
 public class ReservationModel {
     private Long id;
-    private Screening screening;
-    private Collection<Seat> seats;
+    private ScreeningModel screening;
+    private Collection<SeatModel> seats;
     @JsonProperty("reservation_date")
     private LocalDateTime reservationDate = LocalDateTime.now();
     //Client Info

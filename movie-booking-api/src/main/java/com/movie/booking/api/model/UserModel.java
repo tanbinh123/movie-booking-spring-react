@@ -28,7 +28,7 @@ public class UserModel {
     private String email;
     private String phone;
     private String address;
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private List<ReservationModel> reservations;
     private Collection<Role> roles;

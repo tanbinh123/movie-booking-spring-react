@@ -16,6 +16,6 @@ import java.util.List;
 public class GenreModel {
     private Long id;
     private String name;
-    @JsonIgnore
-    private List<MovieModel> movies = new ArrayList<>();
+//    @JsonIgnore
+//    private List<MovieModel> movies = new ArrayList<>();
 }

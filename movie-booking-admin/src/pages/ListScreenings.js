@@ -30,6 +30,7 @@ function ListScreenings() {
             <table className="table table-stripped mt-3">
                 <thead>
                     <tr>
+                        <th scope="col">Poster</th>
                         <th scope="col">Film</th>
                         <th scope="col">Salle</th>
                         <th scope="col">Séance</th>
@@ -42,9 +43,10 @@ function ListScreenings() {
                         scrennings.map((screening,i)=>{
                             return (
                                 <tr id={"screening-"+screening.id}>
+                                    <td><img src={screening.movie.poster} width="70px"/></td>
                                     <td>{screening.movie.title}</td>
                                     <td>{screening.auditorium.name}</td>
-                                    <td>{screening.screening_date}</td>
+                                    <td>{screening.screening_date.replace('T',' ').replace(':00','')}</td>
                                     <td>{screening.movie.runtime}</td>
                                     <td>
                                         <button type="button" onClick={()=>handleDelete(screening.id)} className="btn btn-danger text-white">supprimer</button>

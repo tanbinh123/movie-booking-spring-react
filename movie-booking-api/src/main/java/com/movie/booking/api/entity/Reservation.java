@@ -32,6 +32,9 @@ public class Reservation extends Person {
     @JsonManagedReference(value = "")
     private Screening screening;
 
+    @Column
+    private Double amount;
+
     @ManyToMany
     @JoinTable(
             name = "reservation_seats",

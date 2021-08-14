@@ -4,7 +4,7 @@ import API from '../api'
 function AddAuditorium() {
 
     const [name, setName] = useState("");
-    const [cinema, setCinema] = useState();
+    const [cinema, setCinema] = useState([]);
     //Total points/coordonées (A,B)
     const [totalA, setTotalA] = useState(5);
     const [totalB, setTotalB] = useState(5);
@@ -41,6 +41,9 @@ function AddAuditorium() {
 
     const handleSubmit = (e)=>{
         e.preventDefault();
+        if(cinema.length<1){
+            return alert("Veuillez sélectionner un cinéma pour continuer.")
+        }
         let se = [];
         for(var a=0; a<totalA; a++){
             for(var b=0; b<totalB ; b++){

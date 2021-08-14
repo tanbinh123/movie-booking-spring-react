@@ -5,6 +5,7 @@ import API from '../api'
 function AddScreening() {
 
     const [movie, setMovie] = useState({});
+    const [days, setDays] = useState(10);
     const [auditorium, setAuditorium] = useState({});
     const [movies, setMovies] = useState([]);
     const [auditoriums, setAuditoriums] = useState([]);
@@ -14,6 +15,7 @@ function AddScreening() {
         setMovie("");
         setAuditorium("");
         setDate("");
+        setDays(10);
     }
 
     useEffect(() => {
@@ -40,13 +42,15 @@ function AddScreening() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const body = {
-            movie:movie,
-            auditorium:auditorium,
-            screening_date:date
+        var screenings = [];
+        for(var i=0; i<days; i++){
+            screenings.push({
+                movie:movie,
+                auditorium:auditorium,
+                screening_date: new Date(new Date(date).getTime() + Number(i) * 86400000).toISOString()
+            })
         }
-        console.log(body);
-        API.post("screenings", body).then(res => {
+        API.post("screenings", screenings).then(res => {
             console.log(res);
             console.log(res.data);
             alert("Le screening a été créé avec succès.")
@@ -62,7 +66,7 @@ function AddScreening() {
             <form className="mt-3" onSubmit={handleSubmit}>
                 <div className="mb-2">
                     <label className="form-label">Movies</label>
-                    <select className="form-control" onChange={e=>setMovie(movies[e.target.value])}>
+                    <select className="form-control" onChange={e=>setMovie(movies[e.target.value])} required >
                         {
                             movies.map((movie, i)=>(
                                 <option key={i} value={i}>{movie.title}</option>
@@ -72,7 +76,7 @@ function AddScreening() {
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Auditoriums</label>
-                    <select className="form-control" onChange={e=>setAuditorium(auditoriums[e.target.value])}>
+                    <select className="form-control" onChange={e=>setAuditorium(auditoriums[e.target.value])} required>
                         {
                             auditoriums.map((auditorium, i)=>(
                                 <option key={i} value={i}>{auditorium.name}</option>
@@ -82,7 +86,11 @@ function AddScreening() {
                 </div>
                 <div className="mb-2">
                     <label className="form-label">Date</label>
-                    <input type="datetime-local" className="form-control" value={date} onChange={e => setDate(e.target.value)} />
+                    <input type="datetime-local" className="form-control" value={date} onChange={e => setDate(e.target.value)} required/>
+                </div>
+                <div className="mb-2">
+                    <label className="form-label">Répéter pendant combien de jours?</label>
+                    <input type="number" min="1" max="30" className="form-control" value={days} onChange={e => setDays(e.target.value)} required/>
                 </div>
                 <div className="mt-3">
                     <button type="submit" className="btn btn-primary me-2">ajouter</button>

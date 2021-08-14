@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import API from '../api'
+import Select from 'react-select'
 
 function AddMovie() {
 
@@ -9,6 +10,9 @@ function AddMovie() {
     const [releaseDate, setReleaseDate] = useState("");
     const [description, setDescription] = useState("");
     const [runtime, setRuntime] = useState("");
+    const [genres, setGenres] = useState([]);
+    const [filterValue, setFilterValue] = useState([]);
+    const [filterOptions, setFilterOptions] = useState([]);
 
     const handleReset = () => {
         setTitle("");
@@ -17,6 +21,25 @@ function AddMovie() {
         setReleaseDate("");
         setDescription("");
         setRuntime("");
+        setFilterValue([]);
+    }
+
+    useEffect(() => {
+        API.get("genres").then(res => {
+            const genres = res.data;
+            let options = [];
+            for(const genre of genres){
+                options.push({value:genre, label:genre.name})
+            }
+            setFilterOptions(options);
+        }).catch(err => {
+            console.log("Impossible to fetch /api/genres");
+        });
+    },[]);
+
+    const handleSelect = (e)=>{
+        setGenres(e.map(m=>m.value));
+        setFilterValue(e);
     }
 
     const handleSubmit = (e) => {
@@ -27,7 +50,8 @@ function AddMovie() {
             imdb_rating:imdbRating,
             release_date:releaseDate,
             description:description,
-            runtime:runtime
+            runtime:runtime,
+            genres: genres
         }
         API.post("movies", body).then(res => {
             console.log(res);
@@ -66,6 +90,17 @@ function AddMovie() {
                 <div className="mb-2">
                     <label className="form-label">Durée</label>
                     <input type="text" className="form-control" value={runtime} onChange={e => setRuntime(e.target.value)} required/>
+                </div>
+                <div className="mb-2">                    
+                    <label className="form-label">Genres</label>
+                    <Select
+                        isMulti
+                        className="basic-multi-select"
+                        classNamePrefix="select"
+                        onChange={handleSelect}
+                        options={filterOptions}
+                        value={filterValue}
+                    />
                 </div>
                 <div className="mt-3">
                     <button type="submit" className="btn btn-primary me-2">ajouter</button>

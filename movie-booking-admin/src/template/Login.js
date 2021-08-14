@@ -17,7 +17,9 @@ function Login() {
             console.log(res.data);
             setContext({ ...context, user: res.data.user });
             API.defaults.headers.common['Authorization'] = res.data.token;
-            history.push("/");
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("timestamp", new Date().setMinutes(new Date().getMinutes + 30));
+            history.push("/list-reservations");
         }).catch(err => {
             alert("Something went wrong. Please check user info.")
         });

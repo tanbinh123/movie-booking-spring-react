@@ -17,23 +17,26 @@ import ListGenres from '../pages/ListGenres'
 import ListMovies from '../pages/ListMovies'
 import ListUsers from '../pages/ListUsers'
 import AddScreening from '../pages/AddScreening'
+import AddUser from '../pages/AddUser'
+import ListReservations from '../pages/ListReservations'
 import ListScreenings from '../pages/ListScreenings'
 
 function Dashboard() {
 
     const [context, setContext] = useContext(AppContext);
+    const timestamp = new Date(localStorage.getItem("timestamp"));
 
-    if (context.user == null) {
-        return <Redirect push to="/login" />
+    //Check if session or context user
+    if(context.user != null || timestamp>new Date() ){
 
-    } else {
         return (
             <div id="wrapper" className="d-flex">
                 <ul className="navbar-nav sidebar sidebar-dark text-secondary">
                     <li className="mx-3 mt-4"><h1>MB ADMIN</h1></li>
                     <li><h3 className="m-0 mt-2">Dashboard</h3></li>
-                    <li><Link to="/">Reservations</Link></li>
-                    <li><Link to="/list-users">Utilisateurs</Link></li>
+                    <li><Link to="/list-reservations">Reservations</Link></li>
+                    <li><Link to="/add-user">Ajouter un administrateur</Link></li>
+                    <li><Link to="/list-users">Liste des administrateurs</Link></li>
                     <li><h3 className="m-0 mt-2">Cinema</h3></li>
                     <li><Link to="/add-cinema">Ajouter un cinema</Link></li>
                     <li><Link to="/add-auditorium">Ajouter une salle</Link></li>
@@ -82,6 +85,15 @@ function Dashboard() {
                         </Route>
                         <Route path="/list-screenings">
                             <ListScreenings></ListScreenings>
+                        </Route>                        
+                        <Route path="/list-users">
+                            <ListUsers></ListUsers>
+                        </Route>                        
+                        <Route path="/add-user">
+                            <AddUser></AddUser>
+                        </Route>                        
+                        <Route path="/list-reservations">
+                            <ListReservations></ListReservations>
                         </Route>
                         <Route>
                             <PageNotFound></PageNotFound>
@@ -90,6 +102,8 @@ function Dashboard() {
                 </div>
             </div>
         )
+    }else{
+        return <Redirect push to="/login" />
     }
 }
 
