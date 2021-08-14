@@ -22,6 +22,9 @@ import java.util.List;
 @Table(name="users")
 public class User extends Person implements UserDetails{
 
+    //User implements UserDetails Spring security class
+    //This implement is required to use spring security
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,9 +34,6 @@ public class User extends Person implements UserDetails{
 
     @Column(nullable = false)
     private String password;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))

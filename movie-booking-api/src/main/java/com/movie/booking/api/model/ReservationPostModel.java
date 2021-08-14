@@ -1,7 +1,6 @@
 package com.movie.booking.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.movie.booking.api.entity.Person;
 import com.movie.booking.api.entity.Screening;
 import com.movie.booking.api.entity.Seat;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 
@@ -17,12 +15,10 @@ import java.util.Collection;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ReservationModel {
-    private Long id;
-    private Screening screening;
-    private Collection<Seat> seats;
-    @JsonProperty("reservation_date")
-    private LocalDateTime reservationDate = LocalDateTime.now();
+public class ReservationPostModel {
+    private ScreeningModel screening;
+    @JsonProperty("total_seats")
+    private Integer totalSeats;
     //Client Info
     @JsonProperty("first_name")
     private String firstName;

@@ -1,6 +1,7 @@
 package com.movie.booking.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,10 +33,7 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "auditorium_id")
+    @JsonBackReference(value = "auditorium_seats")
     private Auditorium auditorium;
 
-    @JsonBackReference
-    public Auditorium getAuditorium() {
-        return auditorium;
-    }
 }

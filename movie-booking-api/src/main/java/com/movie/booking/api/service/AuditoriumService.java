@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -18,6 +19,7 @@ import java.util.Collection;
 public class AuditoriumService {
 
     private final AuditoriumRepository auditoriumRepository;
+    private final SeatRepository seatRepository;
     private final ModelMapper modelMapper;
 
     public Collection<AuditoriumModel> getAuditoriums(){
@@ -38,6 +40,7 @@ public class AuditoriumService {
     }
 
     public void removeAuditorium(AuditoriumModel auditoriumModel){
-        auditoriumRepository.deleteById(auditoriumModel.getId());
+        seatRepository.deleteSeatsByAuditoriumId(auditoriumModel.getId());
+        auditoriumRepository.deleteAuditoriumById(auditoriumModel.getId());
     }
 }

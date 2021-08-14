@@ -27,20 +27,15 @@ public class Auditorium {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
+    //Relation many to one between cinema and auditoriums
+    //One cinema can have many auditoriums
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "cinema_id")
+    @JsonBackReference(value = "cinema_auditorium")
     private Cinema cinema;
 
-    @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "auditorium", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "auditorium_seats")
     private Collection<Seat> seats;
 
-    @JsonManagedReference
-    public Collection<Seat> getSeats() {
-        return seats;
-    }
-
-    @JsonBackReference
-    public Cinema getCinema() {
-        return cinema;
-    }
 }

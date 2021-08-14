@@ -22,7 +22,7 @@ public class ScreeningService {
     }
 
     public ScreeningModel getScreening(Long id){
-        return modelMapper.map(screeningRepository.findById(id), ScreeningModel.class);
+        return modelMapper.map(screeningRepository.findById(id).get(), ScreeningModel.class);
     }
 
     public ScreeningModel addScreening(ScreeningModel screeningModel){

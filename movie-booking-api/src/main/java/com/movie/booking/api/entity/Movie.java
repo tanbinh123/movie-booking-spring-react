@@ -1,5 +1,6 @@
 package com.movie.booking.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class Movie {
     @Column(nullable = false)
     private String title;
 
+    //Poster picture URL
     @Column(columnDefinition="TEXT")
     private String poster;
 
@@ -37,21 +39,22 @@ public class Movie {
     @JsonProperty("release_date")
     private String releaseDate;
 
+    //Synopsis
     @Column(columnDefinition="TEXT")
     private String description;
 
     @Column
     private String runtime;
 
+    //Relation many to many between movies and genres
+    //One movie can have many movies
+    //Bidirectional relationship
     @ManyToMany
     @JoinTable(
             name = "movie_genres",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "genre_id"))
+    @JsonManagedReference(value = "movie_genres")
     private Collection<Genre> genres;
 
-    @JsonManagedReference
-    public Collection<Genre> getGenres() {
-        return genres;
-    }
 }

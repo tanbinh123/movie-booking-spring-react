@@ -1,5 +1,6 @@
 package com.movie.booking.api.config;
 
+import com.movie.booking.api.security.AuthTokenFilter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class WebConfig {
+
+    //Configuration class to initiate Java Beans
 
     @Bean
     public ModelMapper modelMapper() {
@@ -19,4 +22,8 @@ public class WebConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public AuthTokenFilter authTokenFilter() {
+        return new AuthTokenFilter();
+    }
 }

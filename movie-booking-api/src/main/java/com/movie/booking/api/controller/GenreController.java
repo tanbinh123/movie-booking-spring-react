@@ -17,16 +17,19 @@ public class GenreController {
 
     private final GenreService genreService;
 
+    //Request GET : /api/genres
     @GetMapping
     public Collection<GenreModel> getGenres (){
         return genreService.getGenres();
     }
 
+    //Request POST : /api/genres
     @PostMapping
     public GenreModel addAuditorium(@RequestBody GenreModel genreModel){
         return genreService.addGenre(genreModel);
     }
 
+    //Request DELETE : /api/genres
     @DeleteMapping("/{id}")
     public void removeAuditorium(@PathVariable("id") Long id){
         genreService.removeGenre(genreService.getGenre(id));

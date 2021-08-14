@@ -15,16 +15,19 @@ public class CinemaController {
 
     private final CinemaService cinemaService;
 
+    //Request GET : /api/cinemas
     @GetMapping
     public Collection<CinemaModel> getCinemas (){
         return cinemaService.getCinemas();
     }
 
+    //Request POST : /api/cinemas
     @PostMapping
     public CinemaModel addCinema(@RequestBody CinemaModel cinemaModel){
         return cinemaService.addCinema(cinemaModel);
     }
 
+    //Request DELETE : /api/cinemas
     @DeleteMapping("/{id}")
     public void removeCinema(@PathVariable("id") Long id){
         cinemaService.removeCinema(cinemaService.getCinema(id));

@@ -31,11 +31,10 @@ public class Cinema {
     @Column(nullable = false)
     private String phone;
 
+    //Relation one to many between cinema and auditoriums
+    //One cinema can have many auditoriums
     @OneToMany(mappedBy = "cinema", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JsonManagedReference(value = "cinema_auditorium")
     private Collection<Auditorium> auditoriums;
 
-    @JsonManagedReference
-    public Collection<Auditorium> getAuditoriums() {
-        return auditoriums;
-    }
 }

@@ -17,16 +17,19 @@ public class UserController {
 
     private final UserService userService;
 
+    //Request GET : /api/users/{id}
     @GetMapping
     public Collection<UserModel> getUsers (){
         return userService.getUsers();
     }
 
+    //Request POST : /api/users
     @PostMapping
     public UserModel addUser(@RequestBody UserModel userModel){
         return userService.addUser(userModel);
     }
 
+    //Request DELETE : /api/users/{id}
     @DeleteMapping("/{id}")
     public void removeUser(@PathVariable("id") Long id){
         userService.removeUser(id);

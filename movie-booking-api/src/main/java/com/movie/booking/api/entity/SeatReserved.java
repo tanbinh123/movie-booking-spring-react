@@ -1,5 +1,7 @@
 package com.movie.booking.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,8 +22,4 @@ public class SeatReserved implements Serializable {
     @JoinColumn(name = "reservation_id")
     private Reservation reservation;
 
-    @Id
-    @OneToOne
-    @JoinColumn(name = "screening_id")
-    private Screening screening;
 }

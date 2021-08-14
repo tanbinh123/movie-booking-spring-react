@@ -12,6 +12,9 @@ import javax.persistence.MappedSuperclass;
 @Setter
 public class Person {
 
+    //This class is used for implements
+    //Implement this class to add the fields
+
     @Column(nullable = false)
     @JsonProperty("first_name")
     private String firstName;

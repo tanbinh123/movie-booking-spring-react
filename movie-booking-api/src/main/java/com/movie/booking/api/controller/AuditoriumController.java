@@ -1,10 +1,7 @@
 package com.movie.booking.api.controller;
 
 import com.movie.booking.api.model.AuditoriumModel;
-import com.movie.booking.api.model.CinemaModel;
-import com.movie.booking.api.model.SeatModel;
 import com.movie.booking.api.service.AuditoriumService;
-import com.movie.booking.api.service.CinemaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,16 +15,19 @@ public class AuditoriumController {
 
     private final AuditoriumService auditoriumService;
 
+    //Request GET : /api/auditoriums
     @GetMapping
     public Collection<AuditoriumModel> getAuditoriums (){
         return auditoriumService.getAuditoriums();
     }
 
+    //Request POST : /api/auditoriums
     @PostMapping
     public AuditoriumModel addAuditorium(@RequestBody AuditoriumModel auditoriumModel){
         return auditoriumService.addAuditorium(auditoriumModel);
     }
 
+    //Request DELETE : /api/auditoriums
     @DeleteMapping("/{id}")
     public void removeAuditorium(@PathVariable("id") Long id){
         auditoriumService.removeAuditorium(auditoriumService.getAuditorium(id));
