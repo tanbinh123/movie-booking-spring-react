@@ -14,7 +14,7 @@ const Navigation = (props) => {
                             <Link to="/" className="navbar-brand text-warning">Movie booking</Link>
                         </div>
                         <div className="col text-end">
-                            <button className="btn btn-outline-warning btn-lg rounded-circle me-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i className="bi bi-search"></i></button>
+                            {/* <button className="btn btn-outline-warning btn-lg rounded-circle me-2" data-bs-toggle="modal" data-bs-target="#searchModal"><i className="bi bi-search"></i></button> */}
                             <button className="btn btn-outline-warning btn-lg rounded-circle" onClick={()=>history.push("/contact")}><i className="bi bi-building"></i></button>
                         </div>
                     </div>

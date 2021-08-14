@@ -40,14 +40,14 @@ function ReservationPage(props) {
             <div className="container mt-5">
                 <form className="search-form border border-warning">
                     <div className="row">
-                        <div className="col-12 row">
+                        <div className="col-12 row text-warning">
                             <div>ACHETEZ VOS PLACES POUR LE: {screening.screening_date.replace('T', ' ').replace(':00', '')}</div>
                             <div><h1>{screening.movie.title}</h1></div>
                         </div>
                     </div>
                 </form>
                 <div className="row mt-2 g-4">
-                    <div className="col-5">
+                    <div className="col-5 text-white">
                         <Elements stripe={stripePromise}>
                             <CheckoutForm screening={screening} />
                         </Elements>
@@ -55,8 +55,7 @@ function ReservationPage(props) {
                     <div className="col text-center">
                         <img src={screening.movie.poster}/> 
                     </div>
-                    <div className="col-4">
-                        <p>Billets encore disponibles pour la séance : {screening.auditorium.seats.length - reservations.length} sur {screening.auditorium.seats.length}</p>
+                    <div className="col-4 text-white">
                         <p>Salle: {screening.auditorium.name}</p>
                         <p>Film: {screening.movie.title}</p>
                     </div>

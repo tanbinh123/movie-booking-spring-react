@@ -221,9 +221,15 @@ function CheckoutForm (props) {
                         setAddress(e.target.value);
                     }}
                 />
-                <div className="mb-3">
-                    <label className="form-label">Quantié de places</label>
-                    <input className="form-control " type="number" value={totalSeats} onChange={e=>setTotalSeats(e.target.value)}/>
+                <div className="mb-3 row">
+                    <div className="col-8">
+                        <label className="form-label">Quantié de places</label>
+                        <input className="form-control" type="number" value={totalSeats} onChange={e=>setTotalSeats(e.target.value)}/>
+                    </div>
+                    <div className="col-4">
+                        <label className="form-label">Prix à payer</label>
+                        <input className="form-control" type="text" disabled value={totalSeats*7 + " €"}></input>                        
+                    </div>                   
                 </div>
             </fieldset>
             <fieldset className="FormGroup">
